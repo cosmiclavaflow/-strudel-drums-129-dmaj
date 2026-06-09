@@ -1,5 +1,5 @@
 {
-  "_base": "https://raw.githubusercontent.com/USER/REPO/BRANCH/",
+  "_base": "https://raw.githubusercontent.com/cosmiclavaflow/-strudel-drums-129-dmaj/main/samples/",
   "mpkick": "mpkick/kick.wav",
   "mptom":  "mptom/tom.wav",
   "mpperc": "mpperc/perc.wav",

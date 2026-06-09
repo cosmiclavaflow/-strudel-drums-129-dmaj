@@ -13,7 +13,7 @@
 
 // ── load the custom sample map (option A: hosted strudel.json) ──
 // (skip this line if you used option B / local import)
-samples('https://raw.githubusercontent.com/USER/REPO/BRANCH/strudel.json')
+samples('https://raw.githubusercontent.com/cosmiclavaflow/-strudel-drums-129-dmaj/main/samples/strudel.json')
 
 setcpm(129/4)   // 129 BPM in 4/4
 

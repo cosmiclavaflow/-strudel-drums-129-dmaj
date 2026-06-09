@@ -101,12 +101,13 @@ host them or import the folder locally (`mpkick`, `mptom`, `mpperc`, `mpclap`,
 
 ## Using the sample version
 
-**Option A — host it (most reliable).** Put the `samples/` files on any static
-host (GitHub raw, Netlify, Vercel, S3…). Edit `samples/strudel.json` `_base` to
-your URL, then in Strudel:
+**Option A — hosted (this repo, already wired up).** The samples live at
+<https://github.com/cosmiclavaflow/-strudel-drums-129-dmaj>. Just load them:
 ```js
-samples('https://<your-host>/strudel.json')
+samples('https://raw.githubusercontent.com/cosmiclavaflow/-strudel-drums-129-dmaj/main/samples/strudel.json')
 ```
+(To host elsewhere, drop the `samples/` files on any CORS-friendly static host and
+point `samples/strudel.json` `_base` at it.)
 
 **Option B — import locally.** In strudel.cc → **sounds** tab → **import-sounds**
 → **import sounds folder** → pick the `samples/` folder. Each subfolder becomes a
