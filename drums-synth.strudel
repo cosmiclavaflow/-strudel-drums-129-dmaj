@@ -1,81 +1,81 @@
 // ════════════════════════════════════════════════════════════════════════
-//  "Drums 129bpm - Dmaj"  →  rich kit, NATURAL aggressive kick + synth perc
-//  Main beat = a real beatbox kick (from your PenguinGranade library),
-//  driven hard for a natural / harsh / aggressive thump. Everything else
-//  (congas, perc, tops) is synthesized to match the clean original
-//  (deep & warm, woody tuned congas, soft dark tops).
-//  Paste into https://strudel.cc and press play.
+//  "Drums 129bpm - Dmaj"  →  BRUTAL kit. Natural aggressive kick + driven perc.
+//  Main beat = a real beatbox kick (PenguinGranade), distorted hard.
+//  Everything is overdriven for an aggressive, in-your-face groove.
 //
-//  The kick sample auto-loads from GitHub (the line below). Each voice is
-//  one block in the stack; comment a block out to mute it.
+//  HOW TO RUN: paste all of this, press Ctrl/Cmd+Enter. The kick loads from
+//  GitHub asynchronously — if you see "sound pgkick not found" the first time,
+//  just press Ctrl/Cmd+Enter again once the samples have loaded (1–2 s).
 // ════════════════════════════════════════════════════════════════════════
 
-samples('https://raw.githubusercontent.com/cosmiclavaflow/-strudel-drums-129-dmaj/main/samples/strudel.json')
+samples({
+  pgkick:      'pgkick/kick.wav',
+  pgkickB:     'pgkickB/kick.wav',
+  pgkickpunch: 'pgkickpunch/kick.wav',
+}, 'https://raw.githubusercontent.com/cosmiclavaflow/-strudel-drums-129-dmaj/main/samples/')
 
 setcpm(129/4)   // 129 BPM in 4/4
 
 stack(
 
-  // 1 ── KICK : NATURAL beatbox kick, driven HARSH + AGGRESSIVE. Steps 6 & 12.
-  //      Swap the sample: "pgkick" (deep), "pgkickB" (deep alt), "pgkickpunch" (clicky).
+  // 1 ── KICK : natural beatbox kick, DRIVEN HARD = harsh + aggressive. Steps 6 & 12.
+  //      swap: s("pgkick") deep · s("pgkickB") deep-alt · s("pgkickpunch") clicky
   s("pgkick")
     .struct("~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ x ~ ~ ~")
-    .speed(.88)                       // lower = deeper/longer (tune the pitch)
-    .distort("2.6:0.55")              // hard drive = the harsh/aggressive edge
-    .shape(.42).coarse(2)             // more grit; raise for nastier, remove for cleaner
-    .lpf(7500).gain(1.1),
-  // sub reinforcement (synth sine @ D1) for low-end weight — mute if you want it raw
+    .speed(.84)
+    .distort("5:0.45").shape(.6).coarse(3)     // ← the brutality. crank/relax these.
+    .lpf(8500).gain(1.2),
+  // sub layer for low-end power (also lightly driven)
   note("d1").s("sine")
     .struct("~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ x ~ ~ ~")
-    .penv(16).pattack(0).pdecay(.05).attack(0).decay(.26).sustain(0)
-    .lpf(3000).gain(.6),
+    .penv(18).pattack(0).pdecay(.05).attack(0).decay(.3).sustain(0)
+    .distort("2:0.6").lpf(2600).gain(.8),
 
-  // 2 ── LOW CONGA / TUMBA : woody FM tone tuned ~D3, soft pitch drop, short tail
+  // 2 ── LOW CONGA / TUMBA : woody FM tone (~D3), now overdriven + snappier
   note("d3").s("triangle*16")
     .gain("0 0.32 0.47 0.53 0.41 0 0.75 0 0 0.41 0.42 0 0.75 0 0 0")
-    .fm(2).fmh(1.5).fmdecay(.07).fmsustain(0)         // FM gives the membrane "wood"
-    .penv(7).pattack(0).pdecay(.05)                   // little conga "pew"
-    .attack(0).decay(.17).sustain(0).release(.03)
-    .lpf(2200).add(note(perlin.range(-.12,.12)))      // gentle organic detune
-    .room(.16).rsize(2.5).pan(.42),
+    .fm(3).fmh(1.5).fmdecay(.06).fmsustain(0)
+    .penv(8).pattack(0).pdecay(.05)
+    .attack(0).decay(.15).sustain(0).release(.02)
+    .distort("2:0.6").shape(.4).lpf(3200)
+    .add(note(perlin.range(-.12,.12))).room(.08).rsize(2).pan(.42),
 
-  // 3 ── MID PERC / SLAP : brighter conga slap tuned ~G3, snappy
+  // 3 ── MID PERC / SLAP : hard, distorted conga slap (~G3)
   note("g3").s("triangle*16")
-    .gain("0.31 0 0.31 0 0.37 0.26 0.43 0 0 0.3 0.25 0.24 0.45 0 0 0.25")
-    .fm(3).fmh(2.01).fmdecay(.03).fmsustain(0)
-    .attack(0).decay(.07).sustain(0).lpf(3200)
+    .gain("0.34 0 0.34 0 0.4 0.3 0.48 0 0 0.33 0.28 0.27 0.5 0 0 0.28")
+    .fm(4).fmh(2.01).fmdecay(.03).fmsustain(0)
+    .attack(0).decay(.07).sustain(0)
+    .distort("2.6:0.55").shape(.5).lpf(5000)
     .add(note(perlin.range(-.1,.1)))
-    .late(rand.range(0,.004)).room(.13).rsize(2.5).pan(.58),
+    .late(rand.range(0,.004)).room(.07).pan(.58),
 
-  // 4 ── TAMBOURINE / soft metal : bandpassed noise, gentle (tops stay restrained)
+  // 4 ── TAMBOURINE / metal : brighter + with edge
   s("white*16")
-    .gain("0.31 0 0.33 0.23 0.23 0.24 0.24 0 0 0.26 0.35 0.24 0.21 0.24 0.3 0.26")
-    .attack(0).decay(.03).sustain(0).bpf(3400).bpq(1.6)
-    .late(rand.range(0,.005)).room(.14).rsize(2.5).pan(.35),
+    .gain("0.34 0 0.36 0.26 0.26 0.27 0.27 0 0 0.29 0.38 0.27 0.24 0.27 0.33 0.29")
+    .attack(0).decay(.03).sustain(0).bpf(4800).bpq(1.8)
+    .distort("1.6:0.7").shape(.4)
+    .late(rand.range(0,.005)).room(.08).pan(.35),
 
-  // 5 ── SHAKER : soft pink-noise, dark and smooth, continuous 16ths
+  // 5 ── SHAKER : bright + gritty pink-noise, continuous 16ths
   s("pink*16")
-    .gain("0.45 0 0.38 0.27 0.35 0.33 0.34 0.2 0.24 0.38 0.38 0.36 0.29 0.25 0.33 0.42")
-    .attack(0).decay(.038).sustain(0).bpf(5600).bpq(1.4)
-    .late(rand.range(0,.004)).pan(.62).room(.08).rsize(2.5),
+    .gain("0.48 0 0.42 0.3 0.38 0.36 0.37 0.22 0.27 0.42 0.42 0.4 0.32 0.28 0.36 0.46")
+    .attack(0).decay(.04).sustain(0).bpf(7500).bpq(1.4).shape(.35)
+    .late(rand.range(0,.004)).pan(.62).room(.05),
 
-  // 6 ── HI-HAT : soft, slightly dark (matches the track's gentle highs)
+  // 6 ── HI-HAT : harsh, bright, hard
   s("white*16")
-    .gain("0.5 0.26 0.45 0.28 0.37 0.36 0.43 0.31 0.31 0.41 0.54 0.34 0.39 0.35 0.5 0.48")
-    .attack(0).decay(.024).sustain(0).hpf(4500).lpf(8500)
-    .late(rand.range(0,.003)).pan(.5).room(.06).rsize(2.5)
+    .gain("0.52 0.28 0.48 0.3 0.4 0.38 0.46 0.33 0.33 0.44 0.56 0.36 0.42 0.37 0.52 0.5")
+    .attack(0).decay(.025).sustain(0).hpf(6500).shape(.4)
+    .late(rand.range(0,.003)).pan(.5).room(.04)
 
 )
 
 // ── tweak cheatsheet ─────────────────────────────────────────────────────
-//  KICK   more aggressive/harsh: distort("4:0.5") shape(.6) coarse(3) crush(7) ;
-//         cleaner/natural: lower distort + remove coarse ; deeper: speed(.7) ;
-//         try other kicks: s("pgkickB") or s("pgkickpunch") ; raw (no sub):
-//         comment out the synth-sine block
-//  CONGAS retune to taste: note("d3")/("g3") -> try a2, f3, c3, a3 ;
-//         more wood: fm(4) ; more "skin": raise fmh
-//  TOPS   brighter hats: hpf(7000) ; softer/darker: lpf(7000) ;
-//         less busy: change a *16 to *8
-//  SPACE  more room: raise .room(...) ; bigger: .rsize(4)
-//  GROOVE add swing: append  .swingBy(1/24, 16)  to the whole stack
+//  KICK    nastier: distort("8:0.4") shape(.8) crush(6) ; cleaner: drop coarse,
+//          lower distort ; deeper: speed(.7) ; other kicks: s("pgkickB"/"pgkickpunch")
+//  WHOLE   more brutal overall: append  .distort("2:0.7")  to the stack( ... ) below,
+//          i.e.  )  ->  ).distort("2:0.7").compressor("-20:8:6:.003:.05")
+//  PERC    harder: raise each .distort/.shape ; softer: lower them
+//  TOPS    brighter: raise hpf/bpf ; darker: lower ; less busy: *16 -> *8
+//  GROOVE  swing: append  .swingBy(1/24, 16)  to the whole stack
 // ─────────────────────────────────────────────────────────────────────────
