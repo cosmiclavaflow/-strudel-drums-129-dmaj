@@ -5,11 +5,15 @@ analysing the audio band-by-band and transcribing each layer.
 
 ## TL;DR — how to play it
 
-Quick start (zero setup):
+**Recommended:** open <https://strudel.cc>, paste **`drums-synth.strudel`**, press
+**Ctrl/Cmd + Enter**. It's a **fully synthesized, rich kit** (no samples to host),
+sound-designed to match the clean original (deep warm sound, kick tuned to D1,
+woody tuned congas, soft dark tops). This is the version to use.
 
-1. Open <https://strudel.cc>
-2. Paste the contents of **`drums.strudel`**
-3. Press **Ctrl/Cmd + Enter** to play.
+The other files are earlier approaches kept for reference:
+- `drums.strudel` — built-in Strudel sounds (quick, but thinner).
+- `drums-samples.strudel` — samples sliced from the *stem* (carries separation
+  artifacts — the reason we moved to synthesis).
 
 ### Which file should I use? (fidelity vs. setup)
 
