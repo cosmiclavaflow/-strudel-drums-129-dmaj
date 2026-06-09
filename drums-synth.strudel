@@ -1,28 +1,34 @@
 // ════════════════════════════════════════════════════════════════════════
-//  "Drums 129bpm - Dmaj"  →  fully SYNTHESIZED rich kit (no samples)
-//  Same pattern/accents as transcribed; sounds designed to match the clean
-//  original (Spt, first 6s): deep & warm, kick tuned to D1, woody tuned
-//  congas, soft/dark tops. Paste into https://strudel.cc and press play.
+//  "Drums 129bpm - Dmaj"  →  rich kit, NATURAL aggressive kick + synth perc
+//  Main beat = a real beatbox kick (from your PenguinGranade library),
+//  driven hard for a natural / harsh / aggressive thump. Everything else
+//  (congas, perc, tops) is synthesized to match the clean original
+//  (deep & warm, woody tuned congas, soft dark tops).
+//  Paste into https://strudel.cc and press play.
 //
-//  Everything is synthesized in Strudel — nothing to host or import.
-//  Each voice is one block in the stack; comment a block out to mute it.
-//  Numbers are made to be tweaked — see the notes at the bottom.
+//  The kick sample auto-loads from GitHub (the line below). Each voice is
+//  one block in the stack; comment a block out to mute it.
 // ════════════════════════════════════════════════════════════════════════
+
+samples('https://raw.githubusercontent.com/cosmiclavaflow/-strudel-drums-129-dmaj/main/samples/strudel.json')
 
 setcpm(129/4)   // 129 BPM in 4/4
 
 stack(
 
-  // 1 ── KICK : deep, tuned to D1, punchy + warm. Sub body (sine + pitch drop)
-  //      layered with a tiny noise click. Syncopated: steps 6 & 12.
+  // 1 ── KICK : NATURAL beatbox kick, driven HARSH + AGGRESSIVE. Steps 6 & 12.
+  //      Swap the sample: "pgkick" (deep), "pgkickB" (deep alt), "pgkickpunch" (clicky).
+  s("pgkick")
+    .struct("~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ x ~ ~ ~")
+    .speed(.88)                       // lower = deeper/longer (tune the pitch)
+    .distort("2.6:0.55")              // hard drive = the harsh/aggressive edge
+    .shape(.42).coarse(2)             // more grit; raise for nastier, remove for cleaner
+    .lpf(7500).gain(1.1),
+  // sub reinforcement (synth sine @ D1) for low-end weight — mute if you want it raw
   note("d1").s("sine")
     .struct("~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ x ~ ~ ~")
-    .penv(26).pattack(0).pdecay(.08).pcurve(1)        // fast downward pitch punch
-    .attack(0).decay(.34).sustain(0).release(.06)
-    .shape(.36).lpf(6000).gain(1.15),                 // saturation = warmth + cuts on small speakers
-  s("white")
-    .struct("~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ x ~ ~ ~")
-    .attack(0).decay(.012).sustain(0).hpf(1500).gain(.18),  // click / beater attack
+    .penv(16).pattack(0).pdecay(.05).attack(0).decay(.26).sustain(0)
+    .lpf(3000).gain(.6),
 
   // 2 ── LOW CONGA / TUMBA : woody FM tone tuned ~D3, soft pitch drop, short tail
   note("d3").s("triangle*16")
@@ -62,8 +68,10 @@ stack(
 )
 
 // ── tweak cheatsheet ─────────────────────────────────────────────────────
-//  KICK   deeper/longer: decay(.45) ; punchier: penv(32) pdecay(.06) ;
-//         warmer/dirtier: shape(.5) ; cleaner: shape(.1)
+//  KICK   more aggressive/harsh: distort("4:0.5") shape(.6) coarse(3) crush(7) ;
+//         cleaner/natural: lower distort + remove coarse ; deeper: speed(.7) ;
+//         try other kicks: s("pgkickB") or s("pgkickpunch") ; raw (no sub):
+//         comment out the synth-sine block
 //  CONGAS retune to taste: note("d3")/("g3") -> try a2, f3, c3, a3 ;
 //         more wood: fm(4) ; more "skin": raise fmh
 //  TOPS   brighter hats: hpf(7000) ; softer/darker: lpf(7000) ;

@@ -1,5 +1,8 @@
 {
   "_base": "https://raw.githubusercontent.com/cosmiclavaflow/-strudel-drums-129-dmaj/main/samples/",
+  "pgkick": "pgkick/kick.wav",
+  "pgkickB": "pgkickB/kick.wav",
+  "pgkickpunch": "pgkickpunch/kick.wav",
   "mpkick": "mpkick/kick.wav",
   "mptom":  "mptom/tom.wav",
   "mpperc": "mpperc/perc.wav",

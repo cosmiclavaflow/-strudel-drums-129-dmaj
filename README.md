@@ -6,9 +6,10 @@ analysing the audio band-by-band and transcribing each layer.
 ## TL;DR — how to play it
 
 **Recommended:** open <https://strudel.cc>, paste **`drums-synth.strudel`**, press
-**Ctrl/Cmd + Enter**. It's a **fully synthesized, rich kit** (no samples to host),
-sound-designed to match the clean original (deep warm sound, kick tuned to D1,
-woody tuned congas, soft dark tops). This is the version to use.
+**Ctrl/Cmd + Enter**. The **main beat is a natural, driven, aggressive kick** (a real
+beatbox kick from the PenguinGranade library, distorted hard) and everything else is
+**synthesized** to match the clean original (woody tuned congas, soft dark tops). The
+kick sample auto-loads from this repo — nothing for you to host. This is the version to use.
 
 The other files are earlier approaches kept for reference:
 - `drums.strudel` — built-in Strudel sounds (quick, but thinner).
