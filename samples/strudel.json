@@ -1,0 +1,11 @@
+{
+  "_base": "https://raw.githubusercontent.com/USER/REPO/BRANCH/",
+  "mpkick": "mpkick/kick.wav",
+  "mptom":  "mptom/tom.wav",
+  "mpperc": "mpperc/perc.wav",
+  "mpclap": "mpclap/clap.wav",
+  "mpchat": "mpchat/chat.wav",
+  "mpshkr": "mpshkr/shkr.wav",
+  "mploop2": "mploop2/loop_2bar.wav",
+  "mploop4": "mploop4/loop_4bar.wav"
+}

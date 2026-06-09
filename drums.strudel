@@ -1,0 +1,54 @@
+// ════════════════════════════════════════════════════════════════════
+//  "Drums 129bpm - Dmaj"  →  Strudel recreation  (built-in sounds)
+//  Transcribed from the source mp3 by per-band onset analysis.
+//
+//  Tempo : 129 BPM, 4/4   •   1 cycle = 1 bar   •   groove ≈ 1-bar loop
+//  Feel  : dense percussive / afro-tech house. Syncopated deep kick,
+//          tonal congas (the "Dmaj" colour), a 16th-note shaker+hat web.
+//
+//  6 layers (mute any line by changing "$:" to "_$:"):
+//    1 kick   2 low conga/tom   3 mid perc   4 tambourine   5 shaker   6 hi-hat
+//
+//  The per-step .gain("...") numbers are the ACTUAL accent levels measured
+//  from the track (16 sixteenth-notes per bar), so the dynamics match.
+//  Paste the whole thing into https://strudel.cc and hit play.
+// ════════════════════════════════════════════════════════════════════
+
+setcpm(129/4)   // 129 BPM in 4/4  (cpm = bpm / beats-per-bar)
+
+// 1 ── KICK : deep & syncopated — hits the "and of 2" and beat 4 (NOT four-on-floor)
+$: s("bd").struct("~ ~ ~ ~ ~ ~ x ~ ~ ~ ~ ~ x ~ ~ ~")
+     .bank("RolandTR909").speed(0.82).shape(0.25).lpf(2400).gain(1.05)
+   // want more sub? swap to .bank("RolandTR808") and drop the .lpf
+
+// 2 ── LOW CONGA / TOM : tonal (~D). 16th roll into beat 2, accents on steps 6 & 12
+$: note("d3").s("lt*16")
+     .gain("0 0.32 0.47 0.53 0.41 0 0.75 0 0 0.41 0.42 0 0.75 0 0 0")
+     .room(0.12).pan(0.42)
+   // .note tunes the tom toward D — change "d3" (try a2/d2/f3) or delete to taste
+
+// 3 ── MID PERCUSSION : conga slap / woodblock, syncopated 16ths
+$: s("perc*16")
+     .gain("0.31 0 0.31 0 0.37 0.26 0.43 0 0 0.3 0.25 0.24 0.45 0 0 0.25")
+     .pan(0.58).room(0.1)
+
+// 4 ── TAMBOURINE / metallic perc : busy upper-mid 16ths
+$: s("tb*16")
+     .gain("0.31 0 0.33 0.23 0.23 0.24 0.24 0 0 0.26 0.35 0.24 0.21 0.24 0.3 0.26")
+     .hpf(1200).pan(0.35)
+
+// 5 ── SHAKER : continuous 16ths, the groove engine
+$: s("sh*16")
+     .gain("0.45 0 0.38 0.27 0.35 0.33 0.34 0.2 0.24 0.38 0.38 0.36 0.29 0.25 0.33 0.42")
+     .hpf(2000).pan(0.62)
+
+// 6 ── CLOSED HI-HAT : 16th-note driver with accents
+$: s("hh*16")
+     .gain("0.5 0.26 0.45 0.28 0.37 0.36 0.43 0.31 0.31 0.41 0.54 0.34 0.39 0.35 0.5 0.48")
+     .hpf(3000).pan(0.5)
+
+// ── tweaks ───────────────────────────────────────────────────────────
+//  • Add a little human swing to everything: append  .swingBy(1/24, 16)
+//  • Thin it out (less busy): change a *16 to *8, or mute layers with _$:
+//  • More drive: raise the shaker/hat .gain numbers slightly
+// ─────────────────────────────────────────────────────────────────────
